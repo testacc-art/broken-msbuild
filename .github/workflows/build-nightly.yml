@@ -1,0 +1,19 @@
+name: Nightly
+on: 
+  push:
+    branches:
+    - master
+jobs:
+  buildAppxBundle:
+    name: Build AppInstaller
+    runs-on: windows-2019
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Prepare Env
+      uses: microsoft/setup-msbuild@v1.0.2
+    - name: Build AppInstaller
+      run: |
+        MSBuild broken-msbuild.csproj -nologo -r -v:diagnostic /p:Configuration=Release /p:UapAppxPackageBuildMode="SideloadOnly" /p:AppxPackageSigningEnabled=true /p:PackageCertificateThumbprint="" /p:PackageCertificateKeyFile="broken-msbuild_TemporaryKey.pfx" /p:GenerateAppInstallerFile=True /p:AppInstallerUri="https://demo.demo/"
