@@ -14,6 +14,6 @@ jobs:
         fetch-depth: 0
     - name: Prepare Env
       uses: microsoft/setup-msbuild@v1.0.2
-    - name: Build AppInstaller
+    - name: Build AppInstaller 
       run: |
         MSBuild broken-msbuild.csproj -nologo -r -v:diagnostic /p:Configuration=Release /p:UapAppxPackageBuildMode="SideloadOnly" /p:AppxPackageSigningEnabled=true /p:PackageCertificateThumbprint="" /p:PackageCertificateKeyFile="broken-msbuild_TemporaryKey.pfx" /p:GenerateAppInstallerFile=False /p:AppInstallerUri="https://demo.demo/"
