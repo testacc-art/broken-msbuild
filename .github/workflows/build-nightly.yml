@@ -17,9 +17,9 @@ jobs:
     - name: Prepare Env
       uses: microsoft/setup-msbuild@v1.0.2
       env:
-        ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
+        ANDROID_NDK_HOME: C:\hostedtoolcache\windows\ndk\r21e\x64
     - name: Build AppInstaller 
       run: |
-        MSBuild broken-msbuild.csproj -nologo -r -v:diagnostic /p:Configuration=Release /p:UapAppxPackageBuildMode="CI" /p:AppxPackageSigningEnabled=true /p:PackageCertificateThumbprint="" /p:PackageCertificateKeyFile="broken-msbuild_TemporaryKey.pfx" /p:GenerateAppInstallerFile=true /p:AppInstallerUri="https://demo.demo/" /p:AppxBundle=Always
+        MSBuild broken-msbuild.csproj -nologo -r -v:diagnostic /p:Configuration=Release /p:UapAppxPackageBuildMode="CI" /p:AppxPackageSigningEnabled=true /p:PackageCertificateThumbprint="" /p:PackageCertificateKeyFile="broken-msbuild_TemporaryKey.pfx" /p:GenerateAppInstallerFile=true /p:AppInstallerUri="https://demo.demo/" /p:AppxBundle=Always /p:AndroidNdkDirectory="C:\hostedtoolcache\windows\ndk\r21e\x64"
       env:
-        ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
+        ANDROID_NDK_HOME: C:\hostedtoolcache\windows\ndk\r21e\x64
