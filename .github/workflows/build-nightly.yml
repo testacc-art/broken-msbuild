@@ -4,20 +4,22 @@ on: [ push ]
 jobs:
   buildAppxBundle:
     name: Build AppInstaller
-    runs-on: self-hosted
+    runs-on: windows-2019
     steps:
     - name: Checkout
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
         
-    - uses: nttld/setup-ndk@v1
-      with:
-        ndk-version: r21e
+#     - uses: nttld/setup-ndk@v1
+#       with:
+#         ndk-version: r21e
     - name: Prepare Env
       uses: microsoft/setup-msbuild@v1.0.2
       env:
         ANDROID_NDK_HOME: C:\hostedtoolcache\windows\ndk\r21e\x64
+    - name: Start visual studio
+      run: start devenv
     - name: Build AppInstaller 
       shell: pwsh
       run: |
