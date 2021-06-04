@@ -36,7 +36,7 @@ jobs:
     - name: Build AppInstaller 
       shell: pwsh
       run: |
-        MSBuild broken-msbuild.csproj -nologo -r -v:diagnostic /p:Configuration=Release /p:UapAppxPackageBuildMode="CI" /p:AppxPackageSigningEnabled=true /p:PackageCertificateThumbprint="" /p:PackageCertificateKeyFile="broken-msbuild_TemporaryKey.pfx" /p:GenerateAppInstallerFile=true /p:AppInstallerUri="https://demo.demo/" /p:AppxBundle=Always /t:build
+        MSBuild broken-msbuild.csproj -nologo -r -v:diagnostic /p:Configuration=Release /p:UapAppxPackageBuildMode="CI" /p:AppxPackageSigningEnabled=true /p:PackageCertificateThumbprint="" /p:PackageCertificateKeyFile="broken-msbuild_TemporaryKey.pfx" /p:GenerateAppInstallerFile="True" /p:AppInstallerUri="https://demo.demo/" /p:AppxBundle=Always /t:build
     
     - name: Check dir 2
       shell: pwsh
