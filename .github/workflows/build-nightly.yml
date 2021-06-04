@@ -20,9 +20,24 @@ jobs:
         ANDROID_NDK_HOME: C:\hostedtoolcache\windows\ndk\r21e\x64
     - name: Start visual studio
       run: start devenv
+    - name: Check dir 1
+      shell: pwsh
+      run: ls
     - name: Build AppInstaller 
       shell: pwsh
       run: |
         MSBuild broken-msbuild.csproj -nologo -r -v:diagnostic /p:Configuration=Release /p:UapAppxPackageBuildMode="CI" /p:AppxPackageSigningEnabled=true /p:PackageCertificateThumbprint="" /p:PackageCertificateKeyFile="broken-msbuild_TemporaryKey.pfx" /p:GenerateAppInstallerFile=true /p:AppInstallerUri="https://demo.demo/" /p:AppxBundle=Always /t:restore
 #       env:
 #         ANDROID_NDK_HOME: C:\hostedtoolcache\windows\ndk\r21e\x64
+    - name: Check dir 2
+      shell: pwsh
+      run: ls
+      
+    - name: Build AppInstaller 
+      shell: pwsh
+      run: |
+        MSBuild broken-msbuild.csproj -nologo -r -v:diagnostic /p:Configuration=Release /p:UapAppxPackageBuildMode="CI" /p:AppxPackageSigningEnabled=true /p:PackageCertificateThumbprint="" /p:PackageCertificateKeyFile="broken-msbuild_TemporaryKey.pfx" /p:GenerateAppInstallerFile=true /p:AppInstallerUri="https://demo.demo/" /p:AppxBundle=Always /t:build
+    
+    - name: Check dir 2
+      shell: pwsh
+      run: ls
