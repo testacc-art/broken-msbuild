@@ -22,7 +22,7 @@ jobs:
       run: start devenv
     - name: Check dir 1
       shell: pwsh
-      run: ls
+      run: dir -Force
     - name: Build AppInstaller 
       shell: pwsh
       run: |
@@ -31,7 +31,7 @@ jobs:
 #         ANDROID_NDK_HOME: C:\hostedtoolcache\windows\ndk\r21e\x64
     - name: Check dir 2
       shell: pwsh
-      run: ls
+      run: dir -Force
       
     - name: Build AppInstaller 
       shell: pwsh
@@ -40,4 +40,4 @@ jobs:
     
     - name: Check dir 2
       shell: pwsh
-      run: ls
+      run: dir -Force
