@@ -4,7 +4,7 @@ on: [ push ]
 jobs:
   buildAppxBundle:
     name: Build AppInstaller
-    runs-on: windows-2019
+    runs-on: self-hosted
     steps:
     - name: Checkout
       uses: actions/checkout@v2
