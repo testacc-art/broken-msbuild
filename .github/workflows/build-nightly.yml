@@ -23,12 +23,12 @@ jobs:
     - name: Build AppInstaller 
       shell: pwsh
       run: |
-        MSBuild broken-msbuild.sln -nologo -r -v:diagnostic /t:Restore /p:Configuration=Release /p:RuntimeIdentifier="win-x86"
+        MSBuild broken-msbuild.csproj -nologo -r -v:diagnostic /t:Restore /p:Configuration=Release /p:RuntimeIdentifier="win-x86"
       
     - name: Build AppInstaller 
       shell: pwsh
       run: |
-        MSBuild broken-msbuild.sln -t:rebuild /p:Configuration=Release /p:UapAppxPackageBuildMode="SideloadOnly" /p:Platform=x86 /p:PackageCertificateKeyFile="broken-msbuild_TemporaryKey.pfx" /p:PackageCertificatePassword="" /p:AppxBundle=Never
+        MSBuild broken-msbuild.csproj -t:Build /p:Configuration=Release /p:UapAppxPackageBuildMode="SideloadOnly" /p:Platform=x86 /p:PackageCertificateKeyFile="broken-msbuild_TemporaryKey.pfx" /p:PackageCertificatePassword="" /p:AppxBundle=Never
       env:
         GenerateAppInstallerFile: True
         AppInstallerUri: "https://demo.demo/"
