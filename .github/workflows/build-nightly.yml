@@ -11,17 +11,15 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Setup dotnet
+    # Install the .NET Core workload
+    - name: Install .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.x
-#     - uses: nttld/setup-ndk@v1
-#       with:
-#         ndk-version: r21e
+        dotnet-version: '5.0.x'
+
     - name: Prepare Env
       uses: microsoft/setup-msbuild@v1.0.2
-      env:
-        ANDROID_NDK_HOME: C:\hostedtoolcache\windows\ndk\r21e\x64
+
     - name: Start visual studio
       run: start devenv
     - name: Check dir 1
@@ -30,9 +28,8 @@ jobs:
     - name: Build AppInstaller 
       shell: pwsh
       run: |
-        MSBuild broken-msbuild.csproj -nologo -r -v:diagnostic /p:Configuration=Release /p:UapAppxPackageBuildMode="CI" /p:AppxPackageSigningEnabled=false /p:AppxPackageDir=".\AppPackages" /p:PackageCertificateThumbprint="" /p:PackageCertificateKeyFile="broken-msbuild_TemporaryKey.pfx" /p:GenerateAppInstallerFile=true /p:AppInstallerUri="https://demo.demo/" /p:AppxBundle=Always /t:restore
-#       env:
-#         ANDROID_NDK_HOME: C:\hostedtoolcache\windows\ndk\r21e\x64
+        MSBuild broken-msbuild.sln -nologo -r -v:diagnostic /t:Restore /p:Configuration=Release /p:RuntimeIdentifier="win-x86"
+
     - name: Check dir 2
       shell: pwsh
       run: dir -Force
@@ -40,8 +37,12 @@ jobs:
     - name: Build AppInstaller 
       shell: pwsh
       run: |
-        MSBuild broken-msbuild.sln /p:Configuration=Release /p:UapAppxPackageBuildMode="CI" /p:AppxPackageSigningEnabled=false /p:AppxPackageDir=".\AppPackages" /p:PackageCertificateThumbprint="" /p:PackageCertificateKeyFile="broken-msbuild_TemporaryKey.pfx" /p:GenerateAppInstallerFile="True" /p:AppInstallerUri="https://demo.demo/" /p:AppxBundle=Always /p:Platform=x86 /t:build
-    
+        MSBuild broken-msbuild.sln /p:Configuration=Release /p:UapAppxPackageBuildMode="SideloadOnly" /p:Platform=x86 /p:PackageCertificateKeyFile="broken-msbuild_TemporaryKey.pfx" /p:AppxBundle=Never
+          if: matrix.ChannelName != 'Prod_Store'
+      env:
+        GenerateAppInstallerFile: True
+        AppInstallerUri: "https://demo.demo/"
+        
     - name: Check dir 2
       shell: pwsh
       run: dir -Force
