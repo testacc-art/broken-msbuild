@@ -23,6 +23,7 @@ jobs:
     - name: Build AppInstaller 
       shell: pwsh
       run: |
+        ls "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VisualStudio"
         MSBuild broken-msbuild.csproj -nologo -r -v:diagnostic /t:Restore /p:Configuration=Release /p:RuntimeIdentifier="win-x86"
       
     - name: Build AppInstaller 
