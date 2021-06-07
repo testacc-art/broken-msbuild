@@ -1,8 +1,5 @@
 name: Nightly
-on: 
-  push:
-    branches:
-    - master
+on: [ push ]
 jobs:
   buildAppxBundle:
     name: Build AppInstaller
