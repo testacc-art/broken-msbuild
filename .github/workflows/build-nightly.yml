@@ -32,7 +32,7 @@ jobs:
         MSBuild . /p:Configuration=Release /p:AppxPackageSigningEnabled=True /p:UapAppxPackageBuildMode="SideloadOnly" /p:Platform=x86 /p:PackageCertificateKeyFile="broken-msbuild_TemporaryKey.pfx" /p:PackageCertificatePassword="" /p:AppxBundle=Never
       env:
         GenerateAppInstallerFile: True
-        AppInstallerUri: "C:\Program Files (x86)"
+        AppInstallerUri:  'c:\'
 #         AppInstallerUri: "https://demo.demo/"
         
     - name: Check dir 2
