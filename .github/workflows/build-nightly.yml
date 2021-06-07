@@ -20,25 +20,15 @@ jobs:
     - name: Prepare Env
       uses: microsoft/setup-msbuild@v1.0.2
 
-    - name: Start visual studio
-      run: start devenv
-    - name: Check dir 1
-      shell: pwsh
-      run: dir -Force
     - name: Build AppInstaller 
       shell: pwsh
       run: |
         MSBuild broken-msbuild.sln -nologo -r -v:diagnostic /t:Restore /p:Configuration=Release /p:RuntimeIdentifier="win-x86"
-
-    - name: Check dir 2
-      shell: pwsh
-      run: dir -Force
       
     - name: Build AppInstaller 
       shell: pwsh
       run: |
-        MSBuild broken-msbuild.sln /p:Configuration=Release /p:UapAppxPackageBuildMode="SideloadOnly" /p:Platform=x86 /p:PackageCertificateKeyFile="broken-msbuild_TemporaryKey.pfx" /p:AppxBundle=Never
-          if: matrix.ChannelName != 'Prod_Store'
+        MSBuild broken-msbuild.sln /p:Configuration=Release /p:UapAppxPackageBuildMode="SideloadOnly" /p:Platform=x86 /p:PackageCertificateKeyFile="broken-msbuild_TemporaryKey.pfx" /p:PackageCertificatePassword="" /p:AppxBundle=Never
       env:
         GenerateAppInstallerFile: True
         AppInstallerUri: "https://demo.demo/"
