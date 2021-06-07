@@ -29,7 +29,7 @@ jobs:
     - name: Build AppInstaller 
       shell: pwsh
       run: |
-        MSBuild broken-msbuild.csproj -t:Rebuild /p:Configuration=Release /p:AppxPackageSigningEnabled=True /p:UapAppxPackageBuildMode="SideloadOnly" /p:Platform=x86 /p:PackageCertificateKeyFile="broken-msbuild_TemporaryKey.pfx" /p:PackageCertificatePassword="" /p:AppxBundle=Never
+        MSBuild broken-msbuild.csproj /t:Clean;Rebuild /p:Configuration=Release /p:AppxPackageSigningEnabled=True /p:UapAppxPackageBuildMode="SideloadOnly" /p:Platform=x86 /p:PackageCertificateKeyFile="broken-msbuild_TemporaryKey.pfx" /p:PackageCertificatePassword="" /p:AppxBundle=Never
       env:
 #         GenerateAppInstallerFile: True
         AppInstallerUri: "https://demo.demo/"
